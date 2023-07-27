@@ -8,7 +8,7 @@ do
 
 	if [ $x -eq 8 ]
 	then
-		echo hi
+		echo Hi
 	fi
 
 	((x++))

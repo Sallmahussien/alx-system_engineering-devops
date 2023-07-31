@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# Manages manage_my_process file
+
+pidFile="/var/run/my_process.pid"
+file="manage_my_process"
+
+start()
+{
+	./manage_my_process &
+	echo "$!" > "$pidFile"
+}
+
+stop()
+{
+	kill "$(cat $pidFile)"
+	rm "$pidFile"
+}
+
+if [ "$1" != "start" ] && [ "$1" != "stop" ] && [ "$1" != "restart" ]; then
+	echo "Usage: $file {start|stop|restart}"
+else
+	if [ "$1" == "start" ]; then
+		start
+		echo "$file started"
+	elif [ "$1" == "stop" ]; then
+		stop
+		echo "$file stopped"
+	else
+		stop
+		start
+		echo "$file restarted"
+	fi
+fi

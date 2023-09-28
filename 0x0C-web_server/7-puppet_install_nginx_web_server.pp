@@ -1,4 +1,4 @@
-#Configuring your server with Puppet
+# Configuring your server with Puppet
 
 exec { 'apt update':
   command => 'sudo apt-get update',
@@ -7,6 +7,13 @@ exec { 'apt update':
 
 package { 'nginx':
   ensure => installed,
+  notify => Service['nginx'],
+}
+
+service { 'nginx':
+  ensure  => running,
+  enable  => true,
+  require => Package['nginx'],
 }
 
 exec { 'Nginx HTTP':
@@ -15,38 +22,27 @@ exec { 'Nginx HTTP':
 }
 
 file { '/var/www/html/index.html':
+  ensure  => file,
   content => 'Hello World!',
-}
-
-file { '/usr/share/nginx/html/custom_404.html':
-  content => 'listen 80 default_server;\n\terror_page 404',
+  require => Package['nginx'],
 }
 
 file { '/etc/nginx/sites-enabled/default':
-  content =>
-  'server {
+  ensure  => file,
+  content => 'server {
     listen 80 default_server;
-    error_page 404 /custom_404.html;
-    location = /custom_404.html {
-      root /usr/share/nginx/html;
-      internal;
-    }
-    listen [::]:80 default_server;
-
-
-    root /var/www/html;
-
-    # Add index.php to the list if you are using PHP
-    index index.html index.htm index.nginx-debian.html;
-
     server_name _;
-    rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
-  
 
     location / {
-      # First attempt to serve request as file, then
-      # as directory, then fall back to displaying a 404.
+      root   /var/www/html;
+      index  index.html index.htm index.nginx-debian.html;
       try_files $uri $uri/ =404;
     }
+
+    location = /redirect_me {
+      return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+    }
   }',
+  require => Package['nginx'],
+  notify  => Service['nginx'],
 }	

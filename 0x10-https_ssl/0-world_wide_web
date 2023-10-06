@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Prints subdomains for a domain
+
+print_subddomains () {
+  domain="$1"
+  subdomain=${domain%%.*}
+  answer_section=$(dig "$domain" | grep -A1 'ANSWER SECTION:' | grep -v 'ANSWER SECTION:');
+  echo "$answer_section" | awk -v subdomain="$subdomain" '{printf "The subdomain %s is a %s record and points to %s\n", subdomain, $4, $5}';
+}
+
+if [ $# -eq 1 ];
+then
+  print_subddomains "www.""$1"
+  print_subddomains "lb-01.""$1"
+  print_subddomains "web-01.""$1"
+  print_subddomains "web-02.""$1"
+else
+  print_subddomains "$2"".""$1"
+fi

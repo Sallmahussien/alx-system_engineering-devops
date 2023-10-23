@@ -27,5 +27,9 @@ if __name__ == "__main__":
     ]
 
     with open("{}.csv".format(user_id), 'w') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=csv_list[0].keys())
+        writer = csv.DictWriter(csvfile,
+                                fieldnames=csv_list[0].keys(),
+                                quoting=csv.QUOTE_ALL
+                                )
+
         writer.writerows(csv_list)

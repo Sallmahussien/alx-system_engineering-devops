@@ -4,8 +4,8 @@
     returns information about his/her TODO list progress.
 """
 
-import requests
 import json
+import requests
 import sys
 
 

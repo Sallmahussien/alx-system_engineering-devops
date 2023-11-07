@@ -51,7 +51,7 @@ def count_words(subreddit, word_list, after=None, count_dict=None):
                     count_dict[word_in_lowecase] += temp_dict[word_in_lowecase]
 
         count_dict = dict(sorted(count_dict.items(),
-                                 key=lambda item: item[1],
+                                 key=lambda item: (item[1], item[0].lower()),
                                  reverse=True))
 
         [print('{}: {}'.format(key, value))

@@ -54,5 +54,8 @@ def count_words(subreddit, word_list, after=None, count_dict=None):
                                  key=lambda item: (item[1], item[0].lower()),
                                  reverse=True))
 
-        [print('{}: {}'.format(key, value))
-         for key, value in count_dict.items() if value > 0]
+        if all(value == 0 for value in count_dict.values()):
+            print()
+        else:
+            [print('{}: {}'.format(key, value))
+             for key, value in count_dict.items() if value > 0]

@@ -32,7 +32,7 @@ def count_words(subreddit, word_list, after=None, count_dict=None):
 
     data = response.json().get('data', {})
     for post in data.get('children', []):
-        title = post.get('data').get('title')
+        title = post.get('data', {}).get('title', '')
 
         for key in count_dict.keys():
             if key in title:

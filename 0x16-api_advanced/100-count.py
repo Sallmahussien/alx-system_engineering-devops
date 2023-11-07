@@ -50,12 +50,13 @@ def count_words(subreddit, word_list, after=None, count_dict=None):
                 if word not in count_dict and word_in_lowecase in count_dict:
                     count_dict[word_in_lowecase] += temp_dict[word_in_lowecase]
 
-        count_dict = dict(sorted(count_dict.items(),
-                                 key=lambda item: (item[1], item[0].lower()),
-                                 reverse=True))
-
         if all(value == 0 for value in count_dict.values()):
             print()
         else:
+            count_dict = dict(sorted(count_dict.items(),
+                                     key=lambda item: (item[1],
+                                                       item[0].lower()),
+                                     reverse=True))
+
             [print('{}: {}'.format(key, value))
              for key, value in count_dict.items() if value > 0]

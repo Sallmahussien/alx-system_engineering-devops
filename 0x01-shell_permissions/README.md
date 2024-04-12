@@ -78,18 +78,18 @@
   `holberton` for the file `hello`.
 
 * **14. Owner and group**
-  * [14-change_owner_and_group](./14-change_owner_and_group): Bash script that changes the
+  * [100-change_owner_and_group](./100-change_owner_and_group): Bash script that changes the
   owner to `betty` and the group owner to `holberton` for all the files and directories
   in the working directory.
 
 * **15. Symbolic links**
-  * [15-symbolic_link_permissions](./15-symbolic_link_permissions): Bash script that changes
+  * [101-symbolic_link_permissions](./101-symbolic_link_permissions): Bash script that changes
   the owner and the group owner of the file `hello` to `betty` and `holberton`, respectively.
 
 * **16. If only**
-  * [16-if_only](./16-if_only): Bash script that changes the owner of the file `hello`
+  * [102-if_only](./102-if_only): Bash script that changes the owner of the file `hello`
   to `betty` only if it is owned by the user `guillaume`.
 
 * **17. Star Wars**
-  * [100-Star_Wars](./100-Star_Wars): Bash script that plays Star Wars Episode IV
+  * [103-Star_Wars](./103-Star_Wars): Bash script that plays Star Wars Episode IV
   in the terminal.
